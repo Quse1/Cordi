@@ -1,26 +1,38 @@
-package main
+package main 
 
 import (
-	"fmt"
-	"math"
+    "fmt"
+    "strconv"
 )
 
-func Reminder(year int) int {
-	var length, fnum int
-	//var mnum1 []int
-	length = int(math.Log10((float64(year)))) + 1 // длина вводимого числа
-
-	for i := length - 1; i >= 0; i-- {
-		fnum = int(float64(year)/math.Pow(10, float64(i))) % 10
-		//mnum1 = append(mnum1, fnum)
-		fmt.Print(fnum)
-	}
-	return fnum
-}
-
 func main() {
-	var year int
-	_, _ = fmt.Scan(&year)
-	Reminder(year)
-
+    var n int 
+    var n2 int
+    var n3 int
+    //var count int
+    //var sum int 
+    _,_ = fmt.Scan(&n)
+    s:= make([]string, n)
+    var snum []int
+    for i:=0; i < len(s); i++ {
+        _, _ = fmt.Scan(&s[i])
+        num, _ := strconv.Atoi(s[i])
+        snum = append(snum, num)
+    }
+    
+    for j:= 0; j < len(snum); j++ {
+        for k:= j+1; k < len(snum); k++ {
+            //fmt.Println(snum[j], snum[k])
+            if snum[j] < 3 && snum[k] < 3 && snum[j] != 1 && snum[k] != 1   {
+                if snum[j] == snum[k] {
+                    n2 = snum[j] + snum[k]
+                    //fmt.Println(snum[j], snum[k])
+                    fmt.Println(n2)
+            }
+        } else if snum[j] == 3 && snum[k] == 1 || snum[j] == 1 && snum[k] == 3 {
+                n3 = snum[j] + snum[k]
+                fmt.Println(n3)
+            }
+}
+}
 }
