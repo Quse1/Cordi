@@ -34,26 +34,46 @@ func main() {
         count++
         snum[4]--
     }
-    for snum[3] + snum[1]  > 0 {
+    if snum[3] > 0 && snum[1] > 0 {
+        for snum[3] + snum[1]  > 0 {
         count++
         snum[3]--
         snum[1]--
     }
-    for snum[2] >= 2 {
+    
+    } else if snum[3] > 0 && snum[1] == 0 {
+        for snum[3]> 0 {
+        count++
+        snum[3]--
+    }
+    
+    } else if snum[2] > 0 && snum[1] == 0 {
+        if snum[2] >=2 {
+           for snum[2] >= 2 {
         count++
         snum[2]--
-        
-    }
-    for snum[2] + snum[1] > 0 {
+    }  
+        } else if snum[2] ==1 {
+            count++
+            snum[2]--
+            }
+    } else if snum[2] > 0 && snum[1] > 0 {
+        for snum[2] + snum[1] > 0 {
         count++
         snum[2]--
         snum[1]--
-    }
-    for snum[1] == 4  {
+        }
+     }else if snum[3] == 0 && snum[1] > 0 {
+        for snum[1] >= 4 {
         count++
+        snum[1]--
     }
-    //fmt.Println(sum2)
+     }
+    
+    
+   
     fmt.Println(snum)
+    fmt.Println(snum[1]+snum[2]+snum[3]+snum[4])
     fmt.Println(count)
     
     /*if n == 1 {2
