@@ -63,17 +63,16 @@ func main() {
         snum[2]--
         snum[1]--
         }
+        
      }else if snum[3] == 0 && snum[1] > 0 {
-        for snum[1] >= 4 {
-        count++
-        snum[1]--
-    }
+        count += snum[1] /4
+     
      }
     
     
    
     fmt.Println(snum)
-    fmt.Println(snum[1]+snum[2]+snum[3]+snum[4])
+    //fmt.Println(snum[1]+snum[2]+snum[3]+snum[4])
     fmt.Println(count)
     
     /*if n == 1 {2
