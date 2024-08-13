@@ -1,84 +1,35 @@
-package main 
+// Online Go compiler to run Golang program online
+// Print "Try programiz.pro" message
 
+package main
 import (
     "fmt"
-    "strconv"
-)
+    "bufio"
+    "os"
+    "strings"
+    
+    )
+
+func alphabet (t []string) string {
+    var res string
+    var alf []string = []string{"_", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+    
+    for i:=0; i < len(alf); i++ {
+        for j:=i; j < i+1; j++ {
+            if alf[i] == t[j] {
+                res = t[j]
+            }
+        }
+    }
+    return res
+}
 
 func main() {
-    var n int
-    var count int
-    _,_ = fmt.Scan(&n)
-    s:= make([]string, n)
-    snum := make(map[int]int, n)
+    input := bufio.NewScanner(os.Stdin)
+    _ = input.Scan()
+    text := input.Text()
+    t := strings.Split(text, "")
+    fmt.Println(alphabet(t))
     
-       for i:=0; i < len(s); i++ {
-        _, _ = fmt.Scan(&s[i])
-        num, _ := strconv.Atoi(s[i])
-        switch num {
-            case 1:
-            snum[num]++
-            case 2:
-            snum[num]++
-            case 3:
-            snum[num]++
-            case 4:
-            snum[num]++
-        }
-    } 
-    if n == 1 {
-        count = 1
-    } else {
-        //fmt.Println(snum)
-        for snum[4] > 0 {
-        count++
-        snum[4]--
-    }
-    if snum[3] > 0  {
-        for snum[3] > 0 {
-        count++
-        snum[3]--
-        if snum[1] > 0 {
-            snum[1]--
-        }
-    }
-    }
-    if snum[2] >= 2 {
-        for snum[2] > 1 {
-            count+= snum[2] / 2 
-            snum[2]-=2
-           }
-    }
-    if snum[2] > 0  {
-        for snum[2] > 0  {
-        count++
-        snum[2]--
-        if snum[1] > 0  {
-            for snum[1] > 0 {
-                snum[1]--
-            }
-            
-        }
-        }
-     }
-     if snum[1] >= 4 {
-        count += snum[1] / 4
-     }
-     
-     if snum[1] <= 2 && snum[1] != 0   {
-        count++
-        snum[1] = 0
-        if snum[2] > 0 {
-            snum[2]--
-        }
-     }
-     
-     if snum[1] == 3 {
-         count++
-         snum[1] = 0
-     }
-     
-    }
-    //fmt.Println(snum)
-    fmt.Println(count)
+    
 }
