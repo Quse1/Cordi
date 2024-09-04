@@ -62,3 +62,102 @@ func (s *Stack) IsFull() bool {
 Стек — это простая, но мощная структура данных, которая находит применение в различных алгоритмах и задачах, таких как обработка выражений, управление вызовами функций и реализация отмены действий. 
 Понимание принципов работы операций push, pop, peek, isEmpty и isFull поможет вам эффективно использовать стек в своих приложениях.
 
+package main
+
+import (
+    "fmt"
+)
+
+// Stack представляет структуру данных стек
+type Stack struct {
+    items   []int // Срез для хранения элементов стека
+    capacity int  // Максимальная емкость стека
+}
+
+// NewStack создает новый стек с заданной емкостью
+func NewStack(capacity int) *Stack {
+    return &Stack{
+        items:   make([]int, 0, capacity), // Инициализация среза с заданной емкостью
+        capacity: capacity,
+    }
+}
+
+// Push добавляет элемент на вершину стека
+func (s *Stack) Push(element int) error {
+    if s.IsFull() {
+        return fmt.Errorf("stack is full")
+    }
+    s.items = append(s.items, element) // Добавляем элемент
+    return nil
+}
+
+// Pop удаляет и возвращает элемент с вершины стека
+func (s *Stack) Pop() (int, error) {
+    if s.IsEmpty() {
+        return 0, fmt.Errorf("stack is empty")
+    }
+    topIndex := len(s.items) - 1
+    item := s.items[topIndex] // Получаем верхний элемент
+    s.items = s.items[:topIndex] // Удаляем его
+    return item, nil
+}
+
+// Peek возвращает элемент на вершине стека без удаления
+func (s *Stack) Peek() (int, error) {
+    if s.IsEmpty() {
+        return 0, fmt.Errorf("stack is empty")
+    }
+    return s.items[len(s.items)-1], nil // Возвращаем верхний элемент
+}
+
+// IsEmpty проверяет, пуст ли стек
+func (s *Stack) IsEmpty() bool {
+    return len(s.items) == 0
+}
+
+// IsFull проверяет, заполнен ли стек
+func (s *Stack) IsFull() bool {
+    return len(s.items) >= s.capacity // Проверяем, достигнута ли максимальная емкость
+}
+
+// Пример использования стека
+func main() {
+    stack := NewStack(5) // Создаем стек с емкостью 5
+
+    // Добавляем элементы в стек
+    for i := 1; i <= 5; i++ {
+        if err := stack.Push(i); err != nil {
+            fmt.Println(err)
+        }
+    }
+
+    // Пытаемся добавить еще один элемент
+    if err := stack.Push(6); err != nil {
+        fmt.Println(err) // Ожидаем сообщение о переполнении
+    }
+
+    // Извлекаем элементы из стека
+    for !stack.IsEmpty() {
+        item, err := stack.Pop()
+        if err != nil {
+            fmt.Println(err)
+        } else {
+            fmt.Println(item) // Выводим извлеченные элементы
+        }
+    }
+}
+
+Объяснение кода
+Структура Stack:
+items: срез для хранения элементов стека.
+capacity: максимальная емкость стека.
+Функция NewStack:
+Создает новый стек с заданной емкостью. Срез items инициализируется с помощью make(), чтобы иметь возможность хранить до capacity элементов.
+Методы Push, Pop, Peek, IsEmpty, IsFull:
+Описаны так же, как и в предыдущем ответе, но теперь учитывают емкость стека.
+Пример использования:
+Создается стек с емкостью 5.
+В стек добавляются элементы от 1 до 5.
+Пытаемся добавить шестой элемент, что вызывает сообщение о переполнении.
+Извлекаем и выводим элементы из стека, пока он не станет пустым.
+Таким образом, теперь в реализации стека указана емкость, и вы можете управлять количеством элементов, которые могут быть добавлены в стек.
