@@ -1,56 +1,20 @@
-package main
+type TreeNode struct {
+    Val   int
+    Left  *TreeNode
+    Right *TreeNode
+}
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
-
-func main() {
-	symb := map[string]int {
-	    "(": 0,
-	    ")": 0,
-	    "[": 0,
-	    "]": 0,
-	    "{": 0,
-	    "}": 0,
-	}
-	var count int
-	input := bufio.NewScanner(os.Stdin)
-	_ = input.Scan()
-	text := input.Text()
-	//fmt.Println(text)
-	
-	for i:=0; i < len(text); i++ {
-	    switch string(text[i]) {
-	        case "(":
-	        symb["("]++
-	        case ")":
-	        symb[")"]++
-	        case "[":
-	        symb["["]++
-	        case "]":
-	        symb["]"]++
-	        case "{":
-	        symb["{"]++
-	        case "}":
-	        symb["}"]++
-	    }
-	}
-	
-	
-	if symb["("] == symb[")"] {
-	    count++
-	}
-	if symb["["] == symb["]"] {
-	    count++
-	}
-	if symb["{"] == symb["}"] {
-	    count++
-	}
-	
-	if count == 3 {
-	    fmt.Println("Success")
-	}
-
+func maxDepth(root *TreeNode) int {
+    if root == nil {
+        return 0
+    }
+    
+    leftDepth := maxDepth(root.Left)
+    rightDepth := maxDepth(root.Right)
+    
+    if leftDepth > rightDepth {
+        return leftDepth + 1
+    } else {
+        return rightDepth + 1
+    }
 }
